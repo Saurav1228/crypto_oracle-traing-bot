@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-// Ethereum Wallet 
+// Ethereum Wallet
 
 pragma solidity ^0.8.13;
 
 contract etherwallet {
-    event Deposit(address sender, uint amount, uint Timestamp);
-    event Withdraw(uint amount, uint Timestamp);
+    event Deposit(address sender, uint256 amount, uint256 Timestamp);
+    event Withdraw(uint256 amount, uint256 Timestamp);
 
     address payable public owner;
 
@@ -19,16 +19,20 @@ contract etherwallet {
     }
 
     // Recieve Function
-    receive () external payable {
+    receive() external payable {
         emit Deposit(msg.sender, msg.value, block.timestamp);
     }
 
-    function withdraw(uint _amount) public onlyOwner {
-        require(_amount <= address(this).balance && _amount != 0, "Invalid amount");
+    function withdraw(uint256 _amount) public onlyOwner {
+        require(
+            _amount <= address(this).balance && _amount != 0,
+            "Invalid amount"
+        );
         owner.transfer(_amount);
+        emit Withdraw(_amount, block.timestamp);
     }
 
-    function getBalance() public view returns (uint) {
+    function getBalance() public view returns (uint256) {
         return address(this).balance;
     }
 }
