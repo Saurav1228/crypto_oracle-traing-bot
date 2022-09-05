@@ -3,16 +3,14 @@ pragma solidity 0.8.13;
 
 contract ethervault {
     address public owner;
-    uint public balance_contract;
-    uint public oneether = 1 ether;
+    uint256 public balance_contract;
+    uint256 public oneether = 1 ether;
 
-    event Deposit(address, uint);
-    event Withdraw(address, uint);
+    event Deposit(address, uint256);
+    event Withdraw(address, uint256);
 
-
-    mapping(address => uint) private balanceMap;
+    mapping(address => uint256) private balanceMap;
     mapping(address => bool) private blacklistMap;
-
 
     constructor() {
         owner = payable(msg.sender);
@@ -30,19 +28,27 @@ contract ethervault {
 
     function blacklist(address _addr, bool _value) public onlyOwner {
         blacklistMap[_addr] = _value;
-    } 
+    }
 
     function deposit() public payable {
-        require(msg.value > 0 && msg.value <= address(msg.sender).balance, 
-        "Error! Invalid");
+        require(
+            msg.value > 0 && msg.value <= address(msg.sender).balance,
+            "Error! Invalid"
+        );
         balanceMap[msg.sender] += msg.value;
         balance_contract += msg.value;
 
         emit Deposit(msg.sender, msg.value);
     }
 
-    function withdraw(address payable _to, uint _amount) public Isblacklisted {
-        require(_amount <= balanceMap[msg.sender] && _amount > 0, "Invalid Balance");
+    function withdraw(address payable _to, uint256 _amount)
+        public
+        Isblacklisted
+    {
+        require(
+            _amount <= balanceMap[msg.sender] && _amount > 0,
+            "Invalid Balance"
+        );
 
         //Balance Updated First, then Transfer is done to prevent re-entrancy
         balanceMap[msg.sender] -= _amount;
@@ -52,12 +58,11 @@ contract ethervault {
         emit Withdraw(_to, _amount);
     }
 
-    function getBalance_contract() public view returns (uint) {
+    function getBalance_contract() public view returns (uint256) {
         return balance_contract;
     }
 
-    function getBalance_Address() public view returns (uint) {
+    function getBalance_Address() public view returns (uint256) {
         return balanceMap[msg.sender];
     }
-
 }
