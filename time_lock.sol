@@ -1,5 +1,8 @@
 //SPDX-License-Identifier: UNLICENSED
 
+//Time Lock Smart contract - 1 month
+// With function to increase lock time
+
 pragma solidity ^0.8.13;
 
 contract TimeLock {
@@ -8,7 +11,7 @@ contract TimeLock {
 
     function deposit() external payable {
         balances[msg.sender] += msg.value;
-        lockTime[msg.sender] = block.timestamp + 1 weeks;
+        lockTime[msg.sender] = block.timestamp + 4 weeks;
     }
 
     function increaseLockTime(uint256 _secondsToIncrease) public {
