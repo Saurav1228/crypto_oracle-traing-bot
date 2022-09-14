@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
-//0x0000000000000000000000000000000000000000
+// Zero address
+// 0x0000000000000000000000000000000000000000
 
 pragma solidity ^0.8.13;
 
 contract array_contract {
+    //Dynamic Array
     uint256[] public dynamicArray;
     uint256 owner_count = 0;
-    //  uint[10][10] public multiArray;
 
     //events
     event changeOwnerEvent(
