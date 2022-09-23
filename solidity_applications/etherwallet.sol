@@ -32,6 +32,7 @@ contract etherwallet {
         emit Withdraw(_amount, block.timestamp);
     }
 
+    //Getter function for balance
     function getBalance() public view returns (uint256) {
         return address(this).balance;
     }
