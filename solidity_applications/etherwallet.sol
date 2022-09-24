@@ -18,7 +18,7 @@ contract etherwallet {
         _;
     }
 
-    // Recieve Function
+    // Recieve Fun
     receive() external payable {
         emit Deposit(msg.sender, msg.value, block.timestamp);
     }
