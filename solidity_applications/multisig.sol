@@ -8,12 +8,13 @@ contract multisig {
     address public owner2 = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2;
     address public owner3 = 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db;
     uint public conformations;
-    address private currentAddressToWithdraw;
+    address payable private currentAddressToWithdraw;
+    uint private currentAmountToWithdraw;
 
     //mappings
     mapping(address => bool) public hasConfirmedCurrentWithdrawal;
 
-    constructor() public {
+    constructor() public payable {
         owner1 = msg.sender;
     }
 
@@ -34,19 +35,28 @@ contract multisig {
 
     receive() external payable {}
 
-    function initiateWithdraw(address _to, uint _value) public onlyOwner {
+    function initiateWithdraw(address payable _to, uint _value)
+        public
+        onlyOwner
+    {
         require(_value <= address(this).balance, "Insufficient Balance");
         conformations += 1;
         hasConfirmedCurrentWithdrawal[msg.sender] = true;
         currentAddressToWithdraw = _to;
+        currentAmountToWithdraw = _value;
     }
 
     function confirmWithdraw() public onlyOwner {
         require(conformations == 1, "Invalid Transaction or already confirmed");
         conformations = 0;
+        currentAddressToWithdraw = payable(address(0));
+        delete hasConfirmedCurrentWithdrawal[owner1];
+        delete hasConfirmedCurrentWithdrawal[owner3];
+        delete hasConfirmedCurrentWithdrawal[owner3];
+        currentAddressToWithdraw.transfer(currentAmountToWithdraw);
     }
 
-    function withdrawalPending(uint _conformations) public view returns (bool) {
+    function withdrawalPending(uint _conformations) public pure returns (bool) {
         if (_conformations == 1) {
             return true;
         } else {
