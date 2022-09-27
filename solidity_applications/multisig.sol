@@ -11,6 +11,9 @@ contract multisig {
     address payable private currentAddressToWithdraw;
     uint private currentAmountToWithdraw;
 
+    //event to check fallback function call
+    event fallbackcalled(uint indexed _sender, uint _amount);
+
     //mappings
     mapping(address => bool) public hasConfirmedCurrentWithdrawal;
 
@@ -31,7 +34,9 @@ contract multisig {
 
     function Deposit() public payable {}
 
-    fallback() external payable {}
+    fallback() external payable {
+        emit fallbackcalled(msg.sender, msg.value);
+    }
 
     receive() external payable {}
 
@@ -77,5 +82,30 @@ contract multisig {
 
     function getBalanceContract() public view returns (uint) {
         return address(this).balance;
+    }
+}
+
+contract depositor {
+    function deposit(address payable _to, uint _value)
+        public
+        payable
+        returns (bool)
+    {
+        require(_value < address(msg.sender).balance, "Insufficient Balance");
+        (bool success, bytes memory value) = _to.call{value: msg.value}(
+            abi.encodeWithSignature("Deposit()")
+        );
+        require(success, "Error in transfer");
+        return success;
+    }
+
+    function deposit_fallbaack(address payable _to, uint _value)
+        public
+        payable
+    {
+        require(_value < address(msg.sender).balance, "Insufficient Balance");
+        (bool success, ) = _to.call{value: msg.value}(
+            abi.encodeWithSignature("HelloWorldFunction()")
+        );
     }
 }
