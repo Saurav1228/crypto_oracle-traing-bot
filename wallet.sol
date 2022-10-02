@@ -4,6 +4,7 @@
 pragma solidity ^0.8.13;
 
 contract wallet {
+    //events
     event Deposit(address sender, uint256 amount, uint256 balance);
     event Withdraw(uint256 amount, uint256 balance);
     event Transfer(address to, uint256 amount, uint256 balance);
