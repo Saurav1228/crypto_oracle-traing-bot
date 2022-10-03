@@ -27,7 +27,7 @@ contract iterablemapping {
             whitelist[addr] = true;
             addressArray.push(addr);
             count++;
-            return "Successfully WHhitelisted";
+            return "Successfully Whitelisted";
         }
     }
 
