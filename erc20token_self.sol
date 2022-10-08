@@ -25,6 +25,7 @@ contract erc20token {
         TotalSupply = _initialsupply;
     }
 
+    //modifier
     modifier onlyOwner() {
         require(msg.sender == deployer, "Not the Owner");
         _;
