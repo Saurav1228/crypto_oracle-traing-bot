@@ -31,6 +31,7 @@ contract erc20token {
         _;
     }
 
+    //function airdrop to an array of addresses
     function airdrop(address[] memory _addrs, uint _amount) public {
         require(
             (_amount * (_addrs.length - 1)) <= balances[msg.sender],
