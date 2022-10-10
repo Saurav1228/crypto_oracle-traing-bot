@@ -10,7 +10,6 @@ contract global {
     address public d = block.coinbase;
     uint public e = block.number;
     uint public f = block.difficulty;
-
     uint public g = msg.value;
 
 }
