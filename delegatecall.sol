@@ -17,6 +17,7 @@ contract B {
 }
 
 contract A {
+    // NOTE: storage layout must be the same as contract B
     uint public num;
     address public sender;
     uint public value;
