@@ -23,5 +23,6 @@ contract C is B {
 contract D is B, C {
     function random() public pure override(C, B) returns (string memory) {
         B.random();
+        super();
     }
 }
