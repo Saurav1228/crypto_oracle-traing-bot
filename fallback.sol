@@ -20,6 +20,7 @@ contract SendEther {
         _to.transfer(msg.value);
     }
 
+    //send via call
     function sendViaCall(address payable _to) public payable {
         (bool sent, ) = _to.call{gas: 1000, value: msg.value}("");
         require(sent, "Failed to Send Ether");
