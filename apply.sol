@@ -9,6 +9,7 @@ contract con {
 
     event log(address indexed caller, uint indexed value);
 
+    //recieve function
     receive() external payable {
         // emit log(msg.sender, msg.value);
     }
