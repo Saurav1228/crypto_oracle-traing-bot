@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 contract Car {
+    //state variables
     address public owner;
     string public model;
     address public carAddr;
