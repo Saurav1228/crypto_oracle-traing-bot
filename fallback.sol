@@ -6,6 +6,8 @@ pragma solidity ^0.8.13;
 contract RecieveEther {
     event Log(uint256 gas);
 
+    //fallback function
+
     fallback() external payable {
         emit Log(gasleft());
     }
