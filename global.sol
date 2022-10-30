@@ -4,6 +4,7 @@
 pragma solidity 0.8.13;
 
 contract global {
+    //global variables solidity
     uint public b = block.gaslimit;
     uint public a = block.chainid;
     uint public e = block.number;
