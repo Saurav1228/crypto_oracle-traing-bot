@@ -25,6 +25,7 @@ contract TimeLock {
         lockTime[msg.sender] = block.timestamp + 4 weeks;
     }
 
+    //function to increase time lock
     function increaseLockTime(uint256 _secondsToIncrease) public onlyOwner {
         lockTime[msg.sender] += _secondsToIncrease;
     }
