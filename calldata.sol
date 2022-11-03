@@ -17,7 +17,7 @@ contract Test {
         returns (string memory)
     {
         // cannot modify _exampleString or use in any function's logic
-        // but can return it
+        // and cannot use in function logic but can return it
         return _exampleString;
     }
 }
