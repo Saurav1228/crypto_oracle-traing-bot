@@ -11,6 +11,7 @@ contract wallet {
 
     address payable public owner;
 
+    //constructor
     constructor() public payable {
         owner = payable(msg.sender);
     }
