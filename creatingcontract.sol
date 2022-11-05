@@ -22,6 +22,7 @@ contract CarFactory {
         cars.push(car);
     }
 
+    //payable send ether
     function createAndSendEther(address _owner, string memory _model)
         public
         payable
