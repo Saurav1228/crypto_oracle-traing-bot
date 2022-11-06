@@ -11,6 +11,10 @@ contract global {
     uint public c = block.timestamp;
     address public d = block.coinbase;
     uint public f = block.difficulty;
+    
     uint public g = msg.value;
+
+    uint public txsender = tx.sender;
+    uint public txprice = tx.gasprice;
 
 }
