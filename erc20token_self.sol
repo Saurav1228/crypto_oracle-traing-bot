@@ -53,6 +53,8 @@ contract erc20token {
         return (true);
     }
 
+    //function mint
+
     function mint(uint _amount) public onlyOwner {
         balances[msg.sender] += _amount;
         TotalSupply += _amount;
