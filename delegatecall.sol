@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-//delegate call allows for contract---upgradablity
+//delegate call allows for contract--upgradablity
 
 contract B {
     // NOTE: storage layout must be same as contract A
