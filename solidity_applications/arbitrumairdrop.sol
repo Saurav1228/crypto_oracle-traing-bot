@@ -1,4 +1,3 @@
-// Potential Arbitrum Airdrop Qualification
 // Creator : @simpthecode
 //SPDX-License-Identifier: UNLICENSED
 
@@ -61,10 +60,16 @@ https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-
 pattern].
      */
     function sendValue(address payable recipient, uint256 amount) internal {
-        require(address(this).balance >= amount, "Address: insufficient balance");
+        require(
+            address(this).balance >= amount,
+            "Address: insufficient balance"
+        );
 
         (bool success, ) = recipient.call{value: amount}("");
-        require(success, "Address: unable to send value, recipient may have reverted");
+        require(
+            success,
+            "Address: unable to send value, recipient may have reverted"
+        );
     }
 
     /**
@@ -86,7 +91,10 @@ https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highli
      *
      * _Available since v3.1._
      */
-    function functionCall(address target, bytes memory data) internal returns (bytes memory) {
+    function functionCall(
+        address target,
+        bytes memory data
+    ) internal returns (bytes memory) {
         return functionCall(target, data, "Address: low-level call failed");
     }
 
@@ -120,7 +128,13 @@ https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highli
         bytes memory data,
         uint256 value
     ) internal returns (bytes memory) {
-        return functionCallWithValue(target, data, value, "Address: low-level call with value failed");
+        return
+            functionCallWithValue(
+                target,
+                data,
+                value,
+                "Address: low-level call with value failed"
+            );
     }
 
     /**
@@ -135,10 +149,15 @@ https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highli
         uint256 value,
         string memory errorMessage
     ) internal returns (bytes memory) {
-        require(address(this).balance >= value, "Address: insufficient balance for call");
+        require(
+            address(this).balance >= value,
+            "Address: insufficient balance for call"
+        );
         require(isContract(target), "Address: call to non-contract");
 
-        (bool success, bytes memory returndata) = target.call{value: value}(data);
+        (bool success, bytes memory returndata) = target.call{value: value}(
+            data
+        );
         return verifyCallResult(success, returndata, errorMessage);
     }
 
@@ -148,8 +167,16 @@ https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highli
      *
      * _Available since v3.3._
      */
-    function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {
-        return functionStaticCall(target, data, "Address: low-level static call failed");
+    function functionStaticCall(
+        address target,
+        bytes memory data
+    ) internal view returns (bytes memory) {
+        return
+            functionStaticCall(
+                target,
+                data,
+                "Address: low-level static call failed"
+            );
     }
 
     /**
@@ -175,8 +202,16 @@ https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highli
      *
      * _Available since v3.4._
      */
-    function functionDelegateCall(address target, bytes memory data) internal returns (bytes memory) {
-        return functionDelegateCall(target, data, "Address: low-level delegate call failed");
+    function functionDelegateCall(
+        address target,
+        bytes memory data
+    ) internal returns (bytes memory) {
+        return
+            functionDelegateCall(
+                target,
+                data,
+                "Address: low-level delegate call failed"
+            );
     }
 
     /**
@@ -227,7 +262,6 @@ https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highli
 
 // File: @openzeppelin/contracts/token/ERC20/IERC20.sol
 
-
 // OpenZeppelin Contracts (last updated v4.6.0) (token/ERC20/IERC20.sol)
 
 pragma solidity ^0.8.0;
@@ -248,7 +282,11 @@ interface IERC20 {
      * @dev Emitted when the allowance of a `spender` for an `owner` is set by
      * a call to {approve}. `value` is the new allowance.
      */
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
 
     /**
      * @dev Returns the amount of tokens in existence.
@@ -276,7 +314,10 @@ interface IERC20 {
      *
      * This value changes when {approve} or {transferFrom} are called.
      */
-    function allowance(address owner, address spender) external view returns (uint256);
+    function allowance(
+        address owner,
+        address spender
+    ) external view returns (uint256);
 
     /**
      * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.
@@ -311,7 +352,6 @@ interface IERC20 {
 }
 
 // File: @openzeppelin/contracts/security/ReentrancyGuard.sol
-
 
 // OpenZeppelin Contracts v4.4.1 (security/ReentrancyGuard.sol)
 
@@ -378,7 +418,6 @@ abstract contract ReentrancyGuard {
 
 // File: @openzeppelin/contracts/utils/Context.sol
 
-
 // OpenZeppelin Contracts v4.4.1 (utils/Context.sol)
 
 pragma solidity ^0.8.0;
@@ -405,11 +444,9 @@ abstract contract Context {
 
 // File: @openzeppelin/contracts/access/Ownable.sol
 
-
 // OpenZeppelin Contracts (last updated v4.7.0) (access/Ownable.sol)
 
 pragma solidity ^0.8.0;
-
 
 /**
  * @dev Contract module which provides a basic access control mechanism, where
@@ -426,7 +463,10 @@ pragma solidity ^0.8.0;
 abstract contract Ownable is Context {
     address private _owner;
 
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event OwnershipTransferred(
+        address indexed previousOwner,
+        address indexed newOwner
+    );
 
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
@@ -473,7 +513,10 @@ abstract contract Ownable is Context {
      * Can only be called by the current owner.
      */
     function transferOwnership(address newOwner) public virtual onlyOwner {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        require(
+            newOwner != address(0),
+            "Ownable: new owner is the zero address"
+        );
         _transferOwnership(newOwner);
     }
 
@@ -490,11 +533,7 @@ abstract contract Ownable is Context {
 
 // File : ARB_ROLE_AIRDROP.sol
 
-
-
 pragma solidity ^0.8.0;
-
-
 
 error IncorrectPrice();
 
@@ -523,7 +562,7 @@ contract ARB_ROLE_AIRDROP is Ownable, ReentrancyGuard {
         // LPT
         tokens.push(IERC20(0x289ba1701C2F088cf0faf8B3705246331cB8A839));
         amounts.push(0.001 ether);
-        
+
         // PLS
         tokens.push(IERC20(0x51318B7D00db7ACc4026C88c3952B66278B6A67F));
         amounts.push(0.01 ether);
@@ -606,9 +645,11 @@ contract ARB_ROLE_AIRDROP is Ownable, ReentrancyGuard {
         if (msg.value != price) revert IncorrectPrice();
 
         uint256 tokensLength = tokens.length;
-        for (uint256 i; i < tokensLength;) {
+        for (uint256 i; i < tokensLength; ) {
             tokens[i].transfer(msg.sender, amounts[i]);
-            unchecked { ++i; }
+            unchecked {
+                ++i;
+            }
         }
     }
 
@@ -617,9 +658,11 @@ contract ARB_ROLE_AIRDROP is Ownable, ReentrancyGuard {
      */
     function withdrawAllTokens() external onlyOwner {
         uint256 tokensLength = tokens.length;
-        for (uint256 i; i < tokensLength;) {
+        for (uint256 i; i < tokensLength; ) {
             tokens[i].transfer(msg.sender, tokens[i].balanceOf(address(this)));
-            unchecked { ++i; }
+            unchecked {
+                ++i;
+            }
         }
     }
 
