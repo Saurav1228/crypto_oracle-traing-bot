@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-//Solidity Array Operations
+//Solidity Array Operation
 pragma solidity 0.8.13;
 
 contract arraycontract {
