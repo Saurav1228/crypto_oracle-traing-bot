@@ -1,11 +1,12 @@
-pragma solidity 0.5.11;
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
 
 //calldata vs memory in solidity
 contract Test {
     string stringTest;
 
     function memoryTest(string memory _exampleString)
-        public
+        public pure
         returns (string memory)
     {
         _exampleString = "example"; // You can modify memory
@@ -14,7 +15,7 @@ contract Test {
     }
 
     function calldataTest(string calldata _exampleString)
-        external
+        external pure
         returns (string memory)
     {
         // cannot modify _exampleString or use in any function's logic
